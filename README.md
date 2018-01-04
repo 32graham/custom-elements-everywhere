@@ -88,8 +88,14 @@ an example from one of the other libraries.
 
 - In the root of the project, Add an `install-*` script to `package.json`.
 - In the root of the project, Add an `build-*` script to `package.json`.
-- In the `libraries/[your library]/` director, update the `build` script in
-  `package.json` to include your library's name.
+- In the `libraries/[your library]/` directory:
+  - Update the `build` script in `package.json` to include your library's name.
+  - Update the `test` script to include the npm registry name of your library's
+    primary package (this is for getting the version number that's displayed).
+
+### Step 3. Include your library in the main page
+
+In the `docs` directory, add your library to the `libraryMap` array in `index.js`.
 
 ## What kind of behavior do the tests assume?
 
