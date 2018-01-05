@@ -17,10 +17,15 @@
 
 var webpack = require('webpack');
 var path = require('path');
+const { AureliaPlugin } = require('aurelia-webpack-plugin');
 
 module.exports = function(config) {
   config.set({
+    // entry: {
+    //   app: ['aurelia-bootstrapper']
+    // },
     plugins: [
+      new AureliaPlugin(),
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       require(path.resolve(__dirname, '../__shared__/karma-plugins/karma-mocha')),
@@ -29,7 +34,10 @@ module.exports = function(config) {
       require(path.resolve(__dirname, '../__shared__/karma-plugins/karma-custom-html-reporter')),
       require(path.resolve(__dirname, '../__shared__/karma-plugins/karma-custom-json-reporter'))
     ],
-    browsers: ['ChromeHeadless', 'FirefoxHeadless'], // run in Chrome and Firefox
+    browsers: [
+      'ChromeHeadless',
+      //'FirefoxHeadless'
+    ], // run in Chrome and Firefox
     customLaunchers: {
       FirefoxHeadless: {
         base: 'Firefox',
@@ -73,7 +81,13 @@ module.exports = function(config) {
             use: {
               loader: 'babel-loader'
             }
-          }
+          },
+          {
+            test: /\.html$/,
+            use: {
+              loader: 'html-loader'
+            }
+          },
         ]
       }
     },
